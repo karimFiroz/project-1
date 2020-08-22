@@ -1,5 +1,5 @@
 <?php include('include/header.php');?>
-<?php echo $_REQUEST['wrongPass'];?>
+
 
 <form action="home.php" method="GET"><br />
 <input type="text" name="username" placeholder="username"><br />
@@ -7,4 +7,31 @@
 <input type="password" name="password" placeholder="password"><br />
 <input type="submit" value="submit">
 </form>
+
+
+<?php 
+
+if(isset($_REQUEST['wrongPass'])){
+    echo $_REQUEST['wrongPass'];
+}
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  <?php include('include/footer.php');?>

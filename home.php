@@ -2,13 +2,14 @@
 
 <!-- echo "<br />"; -->
 <?php
-$username = $_REQUEST['username'];
-$email = $_REQUEST['email'];
-$password = $_REQUEST['password'];
+$userName = $_REQUEST['username'];
+$userEmail = $_REQUEST['email'];
+$userPass = $_REQUEST['password'];
 
 $countPass= strlen($password);
+
 if(!($countPass>=5 && $countPass<=10)){
-header('location:login.php?wrongPass=Your password is wrong.');
+header("location:login.php?wrongPass=You enter wrong password is=$userPass");
 }else{
     header('location:https://facebook.com');
 }
