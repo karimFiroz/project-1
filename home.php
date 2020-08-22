@@ -6,13 +6,15 @@ $userName = $_REQUEST['username'];
 $userEmail = $_REQUEST['email'];
 $userPass = $_REQUEST['password'];
 
-$countPass= strlen($password);
 
-if(!($countPass>=5 && $countPass<=10)){
-header("location:login.php?wrongPass=You enter wrong password is=$userPass");
-}else{
-    header('location:https://facebook.com');
-}
+$hash_format = "$2y$07$";        
+$salt = "sadfj1akafa1djsdk1ff22";
+$conC=$hash_format . $salt;
+echo $userPass;
+echo "<br />";
+echo crypt($userPass, $conC);
+
+
 ?>
 
  <?php include('include/footer.php');?>

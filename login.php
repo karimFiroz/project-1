@@ -1,5 +1,11 @@
 <?php include('include/header.php');?>
+<?php 
 
+if(isset($_REQUEST['wrongPass'])){
+    echo $_REQUEST['wrongPass'];
+}
+
+?>
 
 <form action="home.php" method="GET"><br />
 <input type="text" name="username" placeholder="username"><br />
@@ -9,13 +15,7 @@
 </form>
 
 
-<?php 
 
-if(isset($_REQUEST['wrongPass'])){
-    echo $_REQUEST['wrongPass'];
-}
-
-?>
 
 
 
