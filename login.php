@@ -1,5 +1,5 @@
 <?php include('include/header.php');?>
-echo $_REQUEST['wrongPass'];
+<?php echo $_REQUEST['wrongPass'];?>
 
 <form action="home.php" method="GET"><br />
 <input type="text" name="username" placeholder="username"><br />

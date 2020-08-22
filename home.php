@@ -8,7 +8,7 @@ $password = $_REQUEST['password'];
 
 $countPass= strlen($password);
 if(!($countPass>=5 && $countPass<=10)){
-header('location:login.php?wrongPass=Your username or password is wrong!');
+header('location:login.php?wrongPass=Your password is wrong.');
 }else{
     header('location:https://facebook.com');
 }
