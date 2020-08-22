@@ -1,0 +1,25 @@
+@media screen and (max-width:990px){
+.content-content{
+		width:50%;
+	}
+	.fourth{
+		width:33%;
+	}	
+}
+@media screen and (max-width:768px){
+	.content-content{
+		width:50%;
+	}
+	.fourth{
+		width:50%;
+	}
+}
+@media screen and (max-width:480px){
+	.content-content{
+		width:100%;
+	}
+	.fourth{
+		width:100%;
+	
+	}
+}
