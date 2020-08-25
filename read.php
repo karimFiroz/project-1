@@ -42,8 +42,8 @@ if(!$connection){
             <td><?php echo "$username"; ?></td>
             <td><?php echo "$email"; ?></td>
             <td><?php echo "$password"; ?></td>
-            <td>
-            <a href="delete.php?id=<?php echo "$db_id";?>"onClick="return confirm('Are you sure you want to delete?')">Delete</a>
+            <td><a href="edit.php?edit_id=<?php echo "$db_id";?>">Edit</a>||
+            <a href="delete.php?delete_id=<?php echo "$db_id";?>"onClick="return confirm('Are you sure you want to delete?')">Delete</a>
             <!-- onClick="return confirm('Are you sure you want to delete?')" -->
             </td>
         </tr>
