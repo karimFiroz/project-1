@@ -23,6 +23,7 @@ die("Not Connected.". mysqli_error());
     }else{
         echo "Any Field cannot be blank!";
     }
+    header("location:index.php");
 }
 ?>
 

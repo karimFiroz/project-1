@@ -13,6 +13,9 @@ if(!$connection){
 
     $count = mysqli_num_rows($adanprodan);
     if($count>0){
+        if(isset($_REQUEST['Deleted'])){
+            echo "<font color='red'><h3>One user is deleted!</h3></font>";
+        }
       ?>
       <table class="table">
     <thead class="head-dark">
@@ -40,7 +43,8 @@ if(!$connection){
             <td><?php echo "$email"; ?></td>
             <td><?php echo "$password"; ?></td>
             <td>
-            <a href="delete.php?id=<?php echo "$db_id"; ?>">Delete</a>
+            <a href="delete.php?id=<?php echo "$db_id";?>"onClick="return confirm('Are you sure you want to delete?')">Delete</a>
+            <!-- onClick="return confirm('Are you sure you want to delete?')" -->
             </td>
         </tr>
     </tbody>
@@ -49,11 +53,11 @@ if(!$connection){
   }
   ?>
   </table>
-  Total=
+  Count=
   <?php
   echo $count;
 }else{
-    echo "You have no data in your database!";
+    echo "<font color='red'><h3>You have no data in your database!</h3></font>";
 }
 
 
