@@ -1,7 +1,8 @@
 <?php include('include/header.php');?>
 
 
-
+<a href="login.php">Login</a><br />
+<a href="register.php">Registration</a>
 
 
 <!-----------    <?php echo "<br />" ?>     -------------->
