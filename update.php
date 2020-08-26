@@ -22,7 +22,7 @@ $hidden_id = $_REQUEST['updating_hidden_id'];
 }
 $final_update_query = mysqli_query($connection,$update_query);
 if($final_update_query){
-    header("location:read.php?Updated");
+    header("location:insert.php?Updated");
    }
 ?>
 

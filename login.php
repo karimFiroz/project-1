@@ -27,7 +27,7 @@ die("Not Connected.". mysqli_error());
 }
 ?>
 
-<form action="read.php" method="POST"><br />
+<form action="insert.php" method="POST"><br />
 <input type="text" name="username" placeholder="username"><br />
 <input type="email" name="email" placeholder="email"><br />
 <input type="password" name="password" placeholder="password"><br />

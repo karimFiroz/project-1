@@ -9,6 +9,6 @@ die("Not Connected.". mysqli_error());
    $query="DELETE FROM user_info where id=$received_id";
    $run_delete_query=mysqli_query($connection,$query);
    if($run_delete_query){
-    header("location:read.php?Deleted");
+    header("location:insert.php?Deleted");
    }
    ?>
