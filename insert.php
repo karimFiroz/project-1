@@ -1,4 +1,5 @@
 <?php include('include/header.php');?>
+<a href="insert.php"><h3>New Registration</h3></a>
 <?php 
 
 if(isset($_POST['submit'])){
@@ -11,9 +12,14 @@ if(isset($_POST['submit'])){
     $image_name=$receive_file['name'];
     $image_tmp_name=$receive_file['tmp_name'];
 
+$name_changer = uniqid().".png";
+
+
 if(!empty($name)){
-    $loc="../";
-    move_uploaded_file($image_tmp_name, $loc.$image_name);
+    $location="profile_pic/";
+   if( move_uploaded_file($image_tmp_name, $location.$image_name)){
+       header("location:insert.php");
+   }
 }else{
     echo "Your file is empty!.";
 }
@@ -38,8 +44,9 @@ die("Not Connected.". mysqli_error());
         echo "Any Field cannot be blank!";
     }
 }
-?>
 
+
+       ?>
 <form action="insert.php" method="POST" enctype="multipart/form-data">
 <input type="text" name="username" placeholder="username">
 <input type="email" name="email" placeholder="email">
@@ -48,12 +55,14 @@ die("Not Connected.". mysqli_error());
 <input type="submit" name="submit" value="submit">
 </form>
 
+
+
 <?php 
- 
 $connection = mysqli_connect('localhost','root','','users');
 if(!$connection){
     die("Not Connection.". mysqli_error($connection));
 }
+
     $query = "SELECT * FROM user_info";
     $adanprodan = mysqli_query($connection,$query);
 
@@ -66,6 +75,7 @@ if(!$connection){
             echo "<font color='green'><h3>Data is updated!</h3></font>";
         }
       ?>
+
     <br />
 <br />
       <table class="table">
@@ -95,7 +105,7 @@ if(!$connection){
         <tr>
         <td><?php echo $serial_No; ?></td>
             <td><?php echo "$db_id"; ?></td>
-            <td><img src="profile_pic/<?php echo $profile_pic; ?>"></td>
+            <td><img  src="profile_pic/<?php echo $profile_pic; ?>"/></td>
             <td><?php echo "$username"; ?></td>
             <td><?php echo "$email"; ?></td>
             <td><?php echo "$password"; ?></td>
