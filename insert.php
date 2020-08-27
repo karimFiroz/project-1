@@ -1,4 +1,7 @@
 <?php include('include/header.php');?>
+ 
+
+
 <a href="insert.php"><h3>New Registration</h3></a>
 <?php 
 
@@ -18,10 +21,8 @@ $name_changer = uniqid().".png";
 if(!empty($name)){
     $location="profile_pic/";
    if( move_uploaded_file($image_tmp_name, $location.$image_name)){
-       header("location:read.php");
+       header("location:insert.php");
    }
-}else{
-    echo "Your file is empty!.";
 }
 
 
@@ -41,12 +42,13 @@ die("Not Connected.". mysqli_error());
       die("Not inserted!.".mysqli_error());
         }
     }else{
-        echo "Any Field cannot be blank!";
+        echo "<h4>All registration field must be filled!.<br /></h4>";
     }
 }
 
 
        ?>
+
 <form action="insert.php" method="POST" enctype="multipart/form-data">
 <input type="text" name="username" placeholder="username">
 <input type="email" name="email" placeholder="email">
@@ -54,14 +56,35 @@ die("Not Connected.". mysqli_error());
 <input type="file" name="upload_image"  value="upload">
 <input type="submit" name="submit" value="submit">
 </form>
+<br />
+<div>
+<!-- 
+    <form action="insert.php" method="POST">
+<input type="text" name="search_name" placeholder="search username">
+<input type="submit" name="search" value="search"class="btn btn-info">
+</form>
+</div>
+
+if(isset($_REQUEST['search'])){
+    $recv_name =  $_REQUEST['search_name'];
+    $query ="INSERT INTO user_info WHERE username LIKE  '%$recv_name%'";
+} -->
 
 
+
+
+
+    
 
 <?php 
+
 $connection = mysqli_connect('localhost','root','','users');
 if(!$connection){
     die("Not Connection.". mysqli_error($connection));
+
 }
+
+
 
     $query = "SELECT * FROM user_info";
     $adanprodan = mysqli_query($connection,$query);
@@ -74,10 +97,18 @@ if(!$connection){
         if(isset($_REQUEST['Updated'])){
             echo "<font color='green'><h3>Data is updated!</h3></font>";
         }
+        if(isset($_REQUEST['delete_m_data'])){
+            $chk_data = $_REQUEST['check_data'];
+            $all_marked = implode(",",$chk_data);
+            
+            $query="DELETE FROM user_info WHERE id in ($all_marked)";
+
+            $run_delete_query = mysqli_query($connection,$query);            }
       ?>
 
     <br />
 <br />
+<form action="insert.php" method="POST">
       <table class="table">
     <thead class="head-dark">
         <tr>
@@ -88,6 +119,7 @@ if(!$connection){
             <th>E-mail</th>
             <th>Password</th>
             <th>Action</th>
+            <th><input type="submit" name="delete_m_data"class="btn btn-info" value="Delete_m"></th>
         </tr>
     </thead>
     <?php
@@ -113,6 +145,7 @@ if(!$connection){
             <a href="delete.php?delete_id=<?php echo "$db_id";?>"onClick="return confirm('Are you sure you want to delete?')">Delete</a>
             <!-- onClick="return confirm('Are you sure you want to delete?')" -->
             </td>
+            <td><center><input type="checkbox"name="check_data[]" value="<?php echo "$db_id";?>"</center></td>
         </tr>
     </tbody>
 
@@ -120,6 +153,7 @@ if(!$connection){
   }
   ?>
   </table>
+  </form>
   Count=
   <?php
   echo $count;
