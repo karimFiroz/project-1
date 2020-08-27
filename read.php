@@ -1,13 +1,69 @@
 <?php include('include/header.php');?>
 
 <!-----------    <?php echo "<br />" ?> -->
-
+<?php include('include/header.php');?>
+<a href="insert.php"><h3>New Registration</h3></a>
 <?php 
 
+if(isset($_POST['submit'])){
+    $username = $_POST['username'];
+    $email= $_POST['email'];
+    $password= $_POST['password'];
+
+
+    $receive_file=$_FILES['upload_image'];
+    $image_name=$receive_file['name'];
+    $image_tmp_name=$receive_file['tmp_name'];
+
+
+
+
+if(!empty($name)){
+    $location="profile_pic/";
+   if( move_uploaded_file($image_tmp_name, $location.$image_name)){
+       header("location:read.php");
+   }
+}else{
+    echo "Your file is empty!.";
+}
+
+
+
+    if($username && $email && $password){
+
+
+   $connection = mysqli_connect('localhost','root','','users');
+   if(!$connection){
+die("Not Connected.". mysqli_error());
+   }
+
+   $query ="INSERT INTO user_info(profile_pic,username,email,password) 
+   VALUES('$image_name','$username','$email','$password')";
+    $result = mysqli_query($connection,$query);
+   if(!$result){
+      die("Not inserted!.".mysqli_error());
+        }
+    }else{
+        echo "Any Field cannot be blank!";
+    }
+}
+
+
+       ?>
+<form action="insert.php" method="POST" enctype="multipart/form-data">
+<input type="text" name="username" placeholder="username">
+<input type="email" name="email" placeholder="email">
+<input type="password" name="password" placeholder="password">
+<input type="file" name="upload_image"  value="upload">
+<input type="submit" name="submit" value="submit">
+</form>
+
+<?php 
 $connection = mysqli_connect('localhost','root','','users');
 if(!$connection){
     die("Not Connection.". mysqli_error($connection));
 }
+
     $query = "SELECT * FROM user_info";
     $adanprodan = mysqli_query($connection,$query);
 
@@ -20,11 +76,15 @@ if(!$connection){
             echo "<font color='green'><h3>Data is updated!</h3></font>";
         }
       ?>
+
+    <br />
+<br />
       <table class="table">
     <thead class="head-dark">
         <tr>
         <th>SN</th>
             <th>ID</th>
+            <th>Profile_pic</th>
             <th>Username</th>
             <th>E-mail</th>
             <th>Password</th>
@@ -35,21 +95,23 @@ if(!$connection){
     $serial_No=0;
   while($row = mysqli_fetch_assoc($adanprodan)){
      
-      $db_id=$row['id'];
-      $username=$row['username'];
-      $email=$row['email'];
-      $password=$row['password'];
-      $serial_No++;
+    $db_id=$row['id'];
+    $username=$row['username'];
+    $profile_pic=$row['profile_pic'];
+    $email=$row['email'];
+    $password=$row['password'];
+    $serial_No++;
    ?>
-    <tbody>
+   <tbody>
         <tr>
         <td><?php echo $serial_No; ?></td>
             <td><?php echo "$db_id"; ?></td>
+            <td><img  src="profile_pic/<?php echo $profile_pic; ?>"/></td>
             <td><?php echo "$username"; ?></td>
             <td><?php echo "$email"; ?></td>
             <td><?php echo "$password"; ?></td>
             <td><a href="edit.php?edit_id=<?php echo "$db_id";?>">Edit</a>||
-            <a href="delete.php?delete_id=<?php echo "$db_id";?>"onClick="return confirm('Are you sure you want to delete?')">Delete</a>
+            <a href="delete.php?delete_id=<?php echo "$db_id";?>&profile_pic=<?php echo $profile_pic; ?>"onClick="return confirm('Are you sure you want to delete?')">Delete</a>
             <!-- onClick="return confirm('Are you sure you want to delete?')" -->
             </td>
         </tr>
@@ -76,4 +138,16 @@ if(!$connection){
 
 
 
-<?php include('include/footer.php');?>
+
+
+
+
+
+
+
+
+
+
+
+
+ <?php include('include/footer.php');?>

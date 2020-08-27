@@ -18,7 +18,7 @@ $name_changer = uniqid().".png";
 if(!empty($name)){
     $location="profile_pic/";
    if( move_uploaded_file($image_tmp_name, $location.$image_name)){
-       header("location:insert.php");
+       header("location:read.php");
    }
 }else{
     echo "Your file is empty!.";
@@ -110,7 +110,7 @@ if(!$connection){
             <td><?php echo "$email"; ?></td>
             <td><?php echo "$password"; ?></td>
             <td><a href="edit.php?edit_id=<?php echo "$db_id";?>">Edit</a>||
-            <a href="delete.php?delete_id=<?php echo "$db_id";?>&profile_pic=<?php echo $profile_pic; ?>"onClick="return confirm('Are you sure you want to delete?')">Delete</a>
+            <a href="delete.php?delete_id=<?php echo "$db_id";?>"onClick="return confirm('Are you sure you want to delete?')">Delete</a>
             <!-- onClick="return confirm('Are you sure you want to delete?')" -->
             </td>
         </tr>
@@ -129,24 +129,6 @@ if(!$connection){
 
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
  <?php include('include/footer.php');?>
