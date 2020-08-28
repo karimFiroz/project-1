@@ -1,14 +1,10 @@
 <?php include('include/header.php');?>
-
+<a href="logout.php"><h3>Logout</h3></a>
 <?php
 session_start();
 if($_SESSION['username']==true){
-echo "Welcome".'   '. $_SESSION['username'];
-?>
-<br />
-<a href="logout.php">Logout</a>
+echo "<h3>Welcome! You are successfully login!</h3>".'   '. $_SESSION['username'];
 
-<?php
 }else{
     header("location:index.php");
 }

@@ -4,7 +4,7 @@
 
 <a href="insert.php"><h3>New Registration</h3></a>
 <?php 
-
+session_start();
 if(isset($_POST['submit'])){
     $username = $_POST['username'];
     $email= $_POST['email'];
@@ -44,6 +44,8 @@ die("Not Connected.". mysqli_error());
     }else{
         echo "<h4>All registration field must be filled!.<br /></h4>";
     }
+    $_SESSION['username']=$username;
+    header("location:index.php");
 }
 
 

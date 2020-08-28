@@ -1,37 +1,32 @@
 <?php include('include/header.php');?>
-<?php 
-
-if(isset($_POST['submit'])){
-    $username = $_POST['username'];
-    $email= $_POST['email'];
-    $password= $_POST['password'];
-    if($username && $email && $password){
-
-
-   $connection = mysqli_connect('localhost','root','','users');
-   if(!$connection){
-die("Not Connected.". mysqli_error());
-   }
-
-   $query ="INSERT INTO user_info(username,email,password) 
-   VALUES('$username','$email','$password')";
- $result = mysqli_query($connection,$query);
-  
-   if(!$result){
-      die("Not inserted!.".mysqli_error());
-        }
-    }else{
-        echo "Any Field cannot be blank!";
-    }
-}
-?>
-
-<form action="login.php" method="POST"><br />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<form action="insert.php" method="POST" enctype="multipart/form-data"><br />
 <input type="text" name="username" placeholder="username"><br />
 <input type="email" name="email" placeholder="email"><br />
 <input type="password" name="password" placeholder="password"><br />
-<input type="submit" name="submit" value="submit">
+<input type="radio" name="gender" value="male"> Male
+<input type="radio" name="gender" value="female">Female<br />
+<select name="country">
+    <option value="">Select your country</option>
+    <option value="Bangladesh">Bangladesh</option>
+    <option value="USA">USA</option>
+    <option value="India">India</option>
+    <option value="Pakistan">Pakistan</option>
+</select><br />
+<input type="file" name="upload_image"  value="upload"><br />
+<input type="submit" name="submit" value="Submit"class="btn btn-info">
 </form>
+</body>
+</html>
+
+
 
 
 

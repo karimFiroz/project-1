@@ -4,7 +4,7 @@
 <a href="check.php">Login</a><br />
 </div>
 <div align="right">
-<a href="insert.php">Registration</a>
+<a href="register.php">Registration</a>
 </div>
 
 <!-----------    <?php echo "<br />" ?>     -------------->
