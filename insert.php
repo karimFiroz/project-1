@@ -9,8 +9,8 @@ if(isset($_POST['submit'])){
     $username = $_POST['username'];
     $email= $_POST['email'];
     $password= $_POST['password'];
-
-
+    $gender= $_POST['gender'];
+    $country= $_POST['country'];
     $receive_file=$_FILES['upload_image'];
     $image_name=$receive_file['name'];
     $image_tmp_name=$receive_file['tmp_name'];
@@ -35,8 +35,8 @@ if(!empty($name)){
 die("Not Connected.". mysqli_error());
    }
 
-   $query ="INSERT INTO user_info(profile_pic,username,email,password) 
-   VALUES('$image_name','$username','$email','$password')";
+   $query ="INSERT INTO user_info(profile_pic,username,email,password,gender,country) 
+   VALUES('$image_name','$username','$email','$password','$gender','$country')";
     $result = mysqli_query($connection,$query);
    if(!$result){
       die("Not inserted!.".mysqli_error());
@@ -49,12 +49,21 @@ die("Not Connected.". mysqli_error());
 
        ?>
 
-<form action="insert.php" method="POST" enctype="multipart/form-data">
-<input type="text" name="username" placeholder="username">
-<input type="email" name="email" placeholder="email">
-<input type="password" name="password" placeholder="password">
-<input type="file" name="upload_image"  value="upload">
-<input type="submit" name="submit" value="submit">
+<form action="insert.php" method="POST" enctype="multipart/form-data"><br />
+<input type="text" name="username" placeholder="username"><br />
+<input type="email" name="email" placeholder="email"><br />
+<input type="password" name="password" placeholder="password"><br />
+<input type="radio" name="gender" value="male"> Male
+<input type="radio" name="gender" value="female">Female<br />
+<select name="country">
+    <option value="">Select your country</option>
+    <option value="Bangladesh">Bangladesh</option>
+    <option value="USA">USA</option>
+    <option value="India">India</option>
+    <option value="Pakistan">Pakistan</option>
+</select><br />
+<input type="file" name="upload_image"  value="upload"><br />
+<input type="submit" name="submit" value="Submit"class="btn btn-info">
 </form>
 <br />
 <div>
@@ -118,6 +127,8 @@ if(!$connection){
             <th>Username</th>
             <th>E-mail</th>
             <th>Password</th>
+            <th>Gender</th>
+            <th>Country</th>
             <th>Action</th>
             <th><input type="submit" name="delete_m_data"class="btn btn-info" value="Delete_m"></th>
         </tr>
@@ -131,6 +142,8 @@ if(!$connection){
     $profile_pic=$row['profile_pic'];
     $email=$row['email'];
     $password=$row['password'];
+    $gender=$row['gender'];
+    $country=$row['country'];
     $serial_No++;
    ?>
    <tbody>
@@ -141,6 +154,8 @@ if(!$connection){
             <td><?php echo "$username"; ?></td>
             <td><?php echo "$email"; ?></td>
             <td><?php echo "$password"; ?></td>
+            <td><?php echo "$gender"; ?></td>
+            <td><?php echo "$country"; ?></td>
             <td><a href="edit.php?edit_id=<?php echo "$db_id";?>">Edit</a>||
             <a href="delete.php?delete_id=<?php echo "$db_id";?>"onClick="return confirm('Are you sure you want to delete?')">Delete</a>
             <!-- onClick="return confirm('Are you sure you want to delete?')" -->
