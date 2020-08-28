@@ -1,8 +1,6 @@
 <?php include('include/header.php');?>
 
-
 <?php 
-
 session_start();
    $connection = mysqli_connect('localhost','root','','users');
    if(!$connection){
@@ -15,17 +13,15 @@ if(isset($_REQUEST['submit'])){
 
     $query="SELECT * FROM user_info where username= '$username' && password='$userpass'";
 
-
  $adanprodan = mysqli_query($connection,$query);
   
 $row_count = mysqli_num_rows($adanprodan);
 
 
-
-
-   if($row_count){
-      $_SESSION['username']=$username;
-      header('location:welcome.php');
+if($row_count){
+   $_SESSION['username']=$username;
+   $_SESSION['current_timestamp']=time();
+   header('location:welcome.php');
         }else{
           echo "Not login!";
     }

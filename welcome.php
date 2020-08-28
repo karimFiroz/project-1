@@ -1,14 +1,19 @@
 <?php include('include/header.php');?>
-<a href="logout.php"><h3>Logout</h3></a>
+
 <?php
 session_start();
+
 if($_SESSION['username']==true){
-echo "<h3>Welcome! You are successfully login!</h3>".'   '. $_SESSION['username'];
+if((time() - $_SESSION['current_timestamp'])>300){
+    header('location:logout.php');
+        }else{
+            echo "<h3>Welcome! You are successfully login!</h3>".'   '. $_SESSION['username'];
+             echo "<a href='logout.php'><h3>Logout</h3></a>";   
+} 
 
 }else{
-    header("location:index.php");
+    header('location:index.php'); 
 }
-
 ?>
 
 

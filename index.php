@@ -1,11 +1,10 @@
 <?php include('include/header.php');?>
 
-<div align="left">
-<a href="check.php">Login</a><br />
-</div>
-<div align="right">
-<a href="register.php">Registration</a>
-</div>
+
+<a href="check.php"><h3>Login</h3></a>
+
+<a href="register.php"><h3>Registration</h3></a>
+
 
 <!-----------    <?php echo "<br />" ?>     -------------->
 
